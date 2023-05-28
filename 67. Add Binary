@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        long long int A = stoi(a), B = stoi(b), ans1 = 0, ans2 = 0, res = 0, power1 = 1;
+        long long int power2 = 1,power3= 1, sum;
+        while(A>0 || B>0){
+            long long int lastDigOfA = A%10;
+            ans1 +=(lastDigOfA * power1);
+            power1*=2;
+            A/=10;
+            long long int lastDigOfB = B%10;
+            ans2 +=(lastDigOfB * power2);
+            power2*=2;
+            B/=10;
+        }
+        sum = ans1 + ans2;
+
+        while(sum>0){
+            long long int parityDig = sum%2;
+            res= res + (parityDig*power3);
+            power3*=10;
+            sum/=2;
+        }
+        
+        return to_string(res);
+}
+};
