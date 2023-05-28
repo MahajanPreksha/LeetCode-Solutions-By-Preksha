@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<vector<int>> transpose(vector<vector<int>>& matrix) {
+        int row = matrix.size();
+        int col = matrix[0].size();
+        vector<vector<int>> res;
+        for(int i=0;i<col;i++){
+            vector<int> v;
+            for(int j=0;j<row;j++){
+                v.push_back(matrix[j][i]);
+            }
+            res.push_back(v);
+        }
+        return res;
+    }
+};
