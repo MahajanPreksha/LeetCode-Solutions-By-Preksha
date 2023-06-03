@@ -1,12 +1,16 @@
 class Solution {
 public:
     int climbStairs(int n) {
-        vector<int> V(n, 0);
-        V[0] = 1;
-        V[1] = 2;
-        for(int i=2; i<n; i++){
+        if(n<=2){
+            return n;
+            }
+        vector<int> V(n+1);
+        V[0]=0;
+        V[1]=1;
+        V[2]=2;
+        for(int i=3; i<=n; i++){
             V[i] = V[i-1] + V[i-2];
         }
-        return V[n-1];
+        return V[n];
     }
 };
