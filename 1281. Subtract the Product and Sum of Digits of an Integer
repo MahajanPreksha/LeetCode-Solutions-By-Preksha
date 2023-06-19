@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int sum(int num){
+        if(num>=0 && num<=9){
+            return num;
+        }
+        else{
+            return sum(num/10) + num%10;
+        }
+    }
+    int prod(int num){
+        int product = 1;
+        while(num!=0){
+            int rem = num%10;
+            product *= rem;
+            num /=10;
+        }
+        return product;
+    }
+    int subtractProductAndSum(int n) {
+        int result = prod(n) - sum(n);
+        return result;
+    }
+};
