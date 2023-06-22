@@ -1,0 +1,7 @@
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        int len = s.size();
+        reverse(s.begin(), s.begin()+len);
+    }
+};
