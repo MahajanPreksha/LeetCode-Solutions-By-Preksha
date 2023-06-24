@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int numRabbits(vector<int>& answers) {
+        sort(answers.begin(), answers.end());
+        int ans = 0, count = 1;
+        for (int i=1; i<answers.size(); i++){
+            if(answers[i] != answers[i-1]){
+                int t = answers[i-1] + 1;
+                ans += ((count/t) + (count%t > 0))*t;
+                count = 1;
+            }
+            else count++;
+        }
+        int t = answers[answers.size() - 1] + 1;
+        ans += ((count/t) + (count%t > 0))*t;
+        return ans;
+    }
+};
