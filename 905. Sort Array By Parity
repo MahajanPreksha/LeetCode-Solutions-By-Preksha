@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> sortArrayByParity(vector<int>& nums) {
+        int left_ptr = 0;
+        int right_ptr = nums.size() - 1;
+        while(left_ptr<right_ptr){
+            if(nums[left_ptr]%2!=0 && nums[right_ptr]%2==0){
+                int temp = nums[left_ptr];
+                nums[left_ptr] = nums[right_ptr];
+                nums[right_ptr] = temp;
+                left_ptr++;
+                right_ptr--;
+            }
+            if(nums[left_ptr]%2==0){
+                left_ptr++;
+            }
+            if(nums[right_ptr]%2!=0){
+                right_ptr--;
+            }
+        }
+    return nums;
+    }
+};
