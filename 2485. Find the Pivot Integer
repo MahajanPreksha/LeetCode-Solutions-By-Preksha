@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int pivotInteger(int n) {
+        for(int i=1; i<=n; i++){
+            int t_sum = (i*(i+1))/2;
+            int res = ((n*(n+1))/2) - t_sum + i;
+            if(t_sum==res){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
