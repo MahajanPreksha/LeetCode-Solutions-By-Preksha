@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool detectCapitalUse(string word) {
+        bool allCapital = false;
+        if(isupper(word[0])){
+            allCapital = true;
+        }
+        for(int i=1; i<word.size(); i++){
+            if(islower(word[i]) && allCapital){
+                if(i==1){
+                    allCapital = false;
+                }
+                else{
+                    return false;
+                }
+            }
+            if(isupper(word[i]) and !allCapital)
+                return false;
+        }
+        return true;
+    }
+};
