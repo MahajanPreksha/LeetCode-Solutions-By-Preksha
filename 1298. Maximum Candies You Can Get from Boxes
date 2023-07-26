@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int maxCandies(vector<int>& status, vector<int>& candies, vector<vector<int>>& keys, vector<vector<int>>& containedBoxes, vector<int>& initialBoxes) {
+        int n = status.size();
+        vector<bool> have(n,false), key(n,false);
+        for(int i=0; i<n; i++){
+            if(status[i]==1){
+                key[i] = true;
+            }
+        }
+        for(int i=0; i<initialBoxes.size(); i++){
+            have[initialBoxes[i]]=true;
+        }
+        bool flag = true;
+        int sum = 0;
+        while(flag){
+            flag = false;
+            for(int i=0; i<n; i++){
+                if(have[i]&&key[i]){
+                    flag = true;
+                    sum +=candies[i];
+                    for(int k=0; k<containedBoxes[i].size(); k++){
+                        have[containedBoxes[i][k]] = true;
+                    }
+                    for(int k=0; k<keys[i].size(); k++){
+                        key[keys[i][k]] = true;
+                    }
+                    have[i] = false;
+                    key[i] = false;
+                }
+            }
+        }
+        return sum;
+    }
+};
