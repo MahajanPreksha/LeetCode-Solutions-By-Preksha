@@ -1,0 +1,18 @@
+class Solution {
+    int f(int n){
+        int ans = 1e9;
+        if(n==0){
+            return 0;
+        }
+        for(int i=1; i<=sqrt(n); i++){
+            int count = n/(i*i);
+            count +=f(n%(i*i));
+            ans = min(ans, count);
+        }
+        return ans;
+    }
+public:
+    int numSquares(int n) {
+        return f(n);
+    }
+};
