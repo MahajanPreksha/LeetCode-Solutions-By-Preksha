@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int minimizeMax(vector<int>& nums, int p) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        int low = 0, high = nums[n-1] - nums[0];
+        while(low<high){
+            int mid = low + (high - low)/2;
+            int count = 0;
+            for(int i=1; i<n && count<p; i++){
+                if(nums[i]-nums[i-1]<=mid){
+                    count++;
+                    i++;
+                }
+            }
+            if(count>=p){
+                high = mid;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+};
