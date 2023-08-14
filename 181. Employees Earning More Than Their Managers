@@ -1,0 +1,1 @@
+SELECT B.name AS Employee FROM Employee A INNER JOIN Employee B ON A.id = B.managerId WHERE A.salary<B.salary; 
