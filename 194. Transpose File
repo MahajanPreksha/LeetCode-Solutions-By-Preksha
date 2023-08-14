@@ -1,0 +1,1 @@
+awk '{for (i=1; i<=NF; i++) {a[i,NR]=$i}} END {for (i=1; i<=NF; i++) {for (j=1; j<=NR; j++) {printf a[i,j]; if (j<NR) printf " "} printf "\n"}}' file.txt
