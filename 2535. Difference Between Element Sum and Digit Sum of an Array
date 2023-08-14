@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int differenceOfSum(vector<int>& nums) {
+        int ele_sum = 0;
+        for(int i=0; i<nums.size(); i++){
+            ele_sum +=nums[i];
+        }
+        int total_dig_sum = 0;
+        for(int i=0; i<nums.size(); i++){
+            int dig_sum = 0, num = nums[i];
+            while(num>0){
+                int rem = num%10;
+                dig_sum +=rem;
+                num /=10;
+            }
+            total_dig_sum +=dig_sum;
+        }
+        int diff = abs(ele_sum - total_dig_sum);
+        return diff;
+    }
+};
