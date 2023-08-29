@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+        vector<string> Krows = {"qwertyuiop", "asdfghjkl", "zxcvbnm"};
+        unordered_map<char, int> rowMap;
+        for(int i=0; i<Krows.size(); i++){
+            for(char c:Krows[i]){
+                rowMap[tolower(c)] = i;
+                rowMap[toupper(c)] = i;
+            }
+        }
+        vector<string> res;
+        for(string word:words){
+            int row = rowMap[word[0]];
+            bool sameRow = true;
+            for(char c:word){
+                if(rowMap[c]!=row){
+                    sameRow = false;
+                    break;
+                }
+            }
+            if(sameRow){
+                res.push_back(word);
+            }
+        }
+        return res;
+    }
+};
