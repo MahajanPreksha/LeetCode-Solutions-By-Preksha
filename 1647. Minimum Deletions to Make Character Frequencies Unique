@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int minDeletions(string s) {
+        int deletionsCount = 0;
+        unordered_map<int, bool> frequencyMap;
+        vector<int> charFrequencyCount(26, 0);
+        int n = s.size();
+        for(int i=0; i<n; i++){
+            charFrequencyCount[s[i] - 'a']++;
+        }
+        for(int i=0; i<26; i++){
+            int frequency = charFrequencyCount[i];
+            if(frequencyMap[frequency]==true){
+                while(frequencyMap[frequency]==true && frequency>0){
+                    frequency--;
+                    deletionsCount++;
+                }
+                if(frequency>0){
+                    frequencyMap[frequency] = true;
+                }
+            }
+            else{
+                frequencyMap[frequency] = true;
+            }
+        }
+        return deletionsCount;
+    }
+};
