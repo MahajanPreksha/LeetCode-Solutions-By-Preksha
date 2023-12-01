@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
+        string res1 = "", res2 = "";
+        for(string &i:word1){
+            res1 +=i;
+        }
+        for(string &i:word2){
+            res2 +=i;
+        }
+        if(res1==res2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
