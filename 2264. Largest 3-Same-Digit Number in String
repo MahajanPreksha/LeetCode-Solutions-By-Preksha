@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string largestGoodInteger(string num) {
+        int ans = -1;
+        string res = "";
+        for(int i=2; i<num.length(); i++){
+            if(num[i]==num[i-1] && num[i]==num[i-2]){
+                string subStr = num.substr(i-2, 3);
+                int curr = stoi(subStr);
+                if(curr>ans){
+                    ans = curr;
+                    res = subStr;
+                }
+            }
+        }
+        return res;
+    }
+};
