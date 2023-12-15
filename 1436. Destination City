@@ -1,0 +1,16 @@
+class Solution {
+public:
+    string destCity(vector<vector<string>>& paths) {
+        int len = paths.size();
+        unordered_set<string> s;
+        for(int i=0; i<len; i++){
+            s.insert(paths[i][0]);
+        }
+        for(int i=0; i<len; i++){
+            if(s.find(paths[i][1])==s.end()){
+                return paths[i][1];
+            }
+        }
+        return "";
+    }
+};
