@@ -1,0 +1,40 @@
+class FoodRatings {
+public:
+    unordered_map<string, int> ftr; 
+    unordered_map<string, set<pair<int, string>>> cftr;
+    FoodRatings(vector<string>& foods, vector<string>& cuisines, vector<int>& ratings) {
+        int n = foods.size(); 
+        for(int i=0; i<n; i++){
+            string food = foods[i]; 
+            string cuisine = cuisines[i]; 
+            int rating = ratings[i]; 
+            ftr[food] = rating; 
+            cftr[cuisine].insert({-rating, food});
+        }
+    }
+    
+    void changeRating(string food, int newRating) {
+        int oldrating = ftr[food];
+        ftr[food] = newRating;
+        for(auto& a: cftr){
+            auto it = a.second.find({-oldrating, food});
+            if(it!= a.second.end()){
+                a.second.erase(it);
+                a.second.insert({-newRating, food});
+                break;
+            }
+        }
+    }
+
+    string highestRated(string cuisine) {
+        string highrated = cftr[cuisine].begin()->second; 
+        return highrated; 
+    }
+};
+
+/**
+ * Your FoodRatings object will be instantiated and called as such:
+ * FoodRatings* obj = new FoodRatings(foods, cuisines, ratings);
+ * obj->changeRating(food,newRating);
+ * string param_2 = obj->highestRated(cuisine);
+ */
