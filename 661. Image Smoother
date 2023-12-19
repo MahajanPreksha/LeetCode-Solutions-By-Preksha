@@ -1,0 +1,30 @@
+class Solution {
+private:
+    int smooth(vector<vector<int>> &img, int i, int j, int m, int n){
+        int sum = 0, count = 0;
+        for(int a=-1; a<=1; a++){
+            for(int b=-1; b<=1; b++){
+                int x = i + a;
+                int y = j + b;
+                if(x>=0 && x<m && y>=0 && y<n){
+                    sum +=img[x][y];
+                    count++;
+                }
+            }
+        }
+        int ans = sum/count;
+        return ans;
+    }
+public:
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+        int m = img.size();
+        int n = img[0].size();
+        vector<vector<int>> res(m, vector<int> (n, 0));
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                res[i][j] = smooth(img, i, j, m, n);
+            }
+        }
+        return res;
+    }
+};
