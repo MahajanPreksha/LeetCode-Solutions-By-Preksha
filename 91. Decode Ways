@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isValid(int x, int n){
+        if(n==1){
+            return x>=1 && x<=26;
+        }
+        return x>=10 && x<=26;
+    }
+    int numDecodings(string s) {
+        int n = s.length();
+        if(n==0){
+            return 0;
+        }
+        int first = 1;
+        int second = (isValid(s[0] - '0', 1))? 1 : 0;
+        for(int i=2; i<=n; i++){
+            int ans = 0;
+            if(isValid(s[i-1] - '0', 1)){
+                ans +=second;
+            }
+            if(isValid((s[i-2] - '0')*10 + s[i-1] - '0', 2)){
+                ans +=first;
+            }
+            first = second;
+            second = ans;
+        }
+        return second;
+    }
+};
