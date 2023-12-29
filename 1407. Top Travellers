@@ -1,0 +1,1 @@
+SELECT U.name, CASE WHEN R.user_id IS NULL THEN 0 ELSE SUM(R.distance) END AS travelled_distance FROM Users AS U LEFT JOIN Rides AS R ON U.id = R.user_id GROUP BY R.user_id ORDER BY travelled_distance DESC, U.name ASC;
