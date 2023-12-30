@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool makeEqual(vector<string>& words) {
+        vector<int> charCount(26, 0);
+        for(string &s:words){
+            for(char &i:s){
+                charCount[i-'a']++;
+            }
+        }
+        for(int count:charCount){
+            if(count%words.size()!=0){
+                return false;
+            }
+        }
+        return true;
+    }
+};
