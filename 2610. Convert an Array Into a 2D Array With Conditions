@@ -1,0 +1,15 @@
+class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+        vector<vector<int>> ans;
+        int n = nums.size();
+        vector<int> v(n);
+        for(int &i: nums){
+            if(v[i-1]>=ans.size()){
+                ans.push_back({});
+            }
+            ans[v[i-1]++].push_back(i);
+        }
+        return ans;
+    }
+};
