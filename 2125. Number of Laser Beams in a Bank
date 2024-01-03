@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int numberOfBeams(vector<string>& bank) {
+        vector<int> v;
+        for(string i:bank){
+            int sum = 0;
+            for(char j:i){
+                sum +=j - '0';
+            }
+            if(sum){
+                v.push_back(sum);
+            }
+        }
+        int n = v.size();
+        if(n<2){
+            return 0;
+        }
+        int prev = v[0], ans = 0;
+        for(int i=1; i<n; i++){
+            ans +=prev * v[i];
+            prev = v[i];
+        }
+        return ans;
+    }
+};
