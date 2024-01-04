@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minOperations(vector<int>& nums) {
+        unordered_map<int, int> mp;
+        for(int i:nums){
+            mp[i]++;
+        }
+        int count = 0;
+        for(auto i:mp){
+            int sec = i.second;
+            if(sec==1){
+                return -1;
+            }
+            count +=sec/3;
+            if(sec%3){
+                count++;
+            }
+        }
+        return count;
+    }
+};
