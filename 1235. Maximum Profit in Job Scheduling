@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int jobScheduling(vector<int>& start, vector<int>& end, vector<int>& profit) {
+        int n = start.size();
+        vector<tuple<int, int, int>> jobs(n);
+        for(int i=0; i<n; i++){
+            jobs[i] = {start[i], end[i], profit[i]};
+        }
+        sort(jobs.begin(), jobs.end(), [&](const auto &a, const auto &b){return get<1>(a) < get<1>(b);});
+        vector<int> dp = vector<int>(n+1, 0);
+        for(int i=0; i<n; i++){
+            auto [start_i, end_i, money_i] = jobs[i];
+            auto lastSchdule = upper_bound(jobs.begin(), jobs.begin()+i, start_i, [&](int givenStart, const auto& job){return givenStart < (get<1>(job)); }) - jobs.begin();
+            dp[i+1] = max(dp[i], dp[lastSchdule] + money_i);
+        }
+        return dp[n];
+    }
+};
