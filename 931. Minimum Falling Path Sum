@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int minFallingPathSum(vector<vector<int>>& matrix) {
+        for(int row=matrix.size()-2; row>=0; row--){
+            for(int col=0; col<matrix[0].size(); col++){
+                if(col==0){
+                    matrix[row][col] += min(matrix[row+1][col], matrix[row+1][col+1]);
+                }
+                else if(col==matrix[0].size()-1){
+                    matrix[row][col] += min(matrix[row+1][col], matrix[row+1][col-1]);
+                }
+                else{
+                    int a = matrix[row+1][col];
+                    int b = matrix[row+1][col-1];
+                    int c = matrix[row+1][col+1];
+                    int small = INT_MAX;
+                    if(a<small){
+                        small = a;
+                    }
+                    if(b<small){
+                        small = b;
+                    }
+                    if(c<small){
+                        small = c;
+                    }
+                    matrix[row][col] +=small;
+                }
+            }
+        }
+        return *min_element(matrix[0].begin(), matrix[0].end());
+    }
+};
