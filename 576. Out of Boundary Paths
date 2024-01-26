@@ -1,0 +1,51 @@
+class Solution {
+private:
+    int mod = 1e9 + 7;
+public:
+    int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+        vector<vector<vector<int>>> dp(maxMove+1, vector<vector<int>> (m, vector<int>(n, -1)));
+        return paths(m, n, maxMove, startRow, startColumn, dp) % mod;
+    }
+    int paths(int m ,int n,int maxMoves,int i,int j,vector<vector<vector<int>>> &dp){
+        if(maxMoves==0){
+            return 0;
+        }
+        if(dp[maxMoves][i][j]!=-1){
+            return dp[maxMoves][i][j];
+        }
+        int steps = 0;
+        if(i-1<0){
+            steps +=1;
+            steps %=mod;
+        }
+        else{
+            steps +=(paths(m, n, maxMoves-1, i-1, j, dp) % mod);
+            steps %=mod;
+        }
+        if(j-1<0){
+            steps +=1;
+            steps %=mod;
+        }
+        else{
+            steps +=(paths(m, n, maxMoves-1, i, j-1, dp) % mod);
+            steps %=mod;
+        }
+        if(i+1==m){
+            steps +=1;
+            steps %=mod;
+        }
+        else{
+            steps +=(paths(m, n, maxMoves-1, i+1, j, dp) % mod);
+            steps %=mod;
+        }
+        if(j+1==n){
+            steps +=1;
+            steps %=mod;
+        }
+        else{
+            steps +=(paths(m, n, maxMoves-1, i, j+1, dp) % mod);
+            steps %=mod;
+        }
+        return dp[maxMoves][i][j] = steps % mod; 
+    }
+};
