@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<int>> divideArray(vector<int>& nums, int k) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> segments;
+        for (int i=0; i<n;){
+            vector<int> currSeg;
+            if(nums[i+2]-nums[i]>k){
+                vector<vector<int>> emptySeg;
+                return emptySeg;
+            }
+            int segSize = 3;
+            while(segSize-->0){
+                currSeg.push_back(nums[i++]);
+            }
+            segments.push_back(currSeg);
+        }
+        return segments;
+    }
+};
