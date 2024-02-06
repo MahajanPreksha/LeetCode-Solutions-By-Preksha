@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string, vector<string>> anagramGroups;
+        for(auto word:strs){
+            string s = word;
+            sort(s.begin(), s.end());
+            if(anagramGroups.find(s)==anagramGroups.end()){
+                anagramGroups[s] = {word};
+            }
+            else{
+                anagramGroups[s].push_back(word);
+            }
+        }
+        vector<vector<string>> result;
+        for(auto &g:anagramGroups){
+            result.push_back(g.second);
+        }
+        return result;
+    }
+};
