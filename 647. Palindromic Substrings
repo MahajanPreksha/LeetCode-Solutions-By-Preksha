@@ -1,0 +1,28 @@
+class Solution {
+private:
+    string st;
+    int f(int left, int right){
+        int n = st.size();
+        int ans = 0;
+        while(left>=0 && right<=n){
+            if(st[left--]==st[right++]){
+                ans++;
+            }
+            else{
+                break;
+            }
+        }
+        return ans;
+    }
+public:
+    int countSubstrings(string s) {
+        int len = s.size();
+        int res = 0;
+        st = s;
+        for(int i=0; i<len; i++){
+            res +=f(i, i);
+            res +=f(i, i+1);
+        }
+        return res;
+    }
+};
