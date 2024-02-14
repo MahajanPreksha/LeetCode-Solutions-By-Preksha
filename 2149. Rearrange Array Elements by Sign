@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        vector<int> pos, neg;
+        int n = nums.size();
+        for(int i=0; i<n; i++){
+            if(nums[i]>0){
+                pos.push_back(nums[i]);
+            }
+            else{
+                neg.push_back(nums[i]);
+            }
+        }
+        vector<int> ans;
+        int P = pos.size(), N = neg.size();
+        int i = 0, j = 0;
+        while(i<P && j<N){
+            ans.push_back(pos[i]);
+            ans.push_back(neg[j]);
+            i++, j++;
+        }
+        while(i<P){
+            ans.push_back(pos[i]);
+            i++;
+        }
+        while(j<N){
+            ans.push_back(neg[j]);
+            j++;
+        }
+        return ans;
+    }
+};
