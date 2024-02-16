@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        set<int> s;
+        for(auto ele:nums){
+            s.insert(ele);
+        }
+        vector<int> v;
+        for(auto ele:s){
+            v.push_back(ele);
+        }
+        nums = v;
+        return nums.size();
+    }
+};
