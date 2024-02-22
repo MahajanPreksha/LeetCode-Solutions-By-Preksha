@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        int ans = -1;
+        if(n==1){
+            return 1;
+        }
+        unordered_map<int, int> mp;
+        for(auto ele:trust){
+            mp[ele[0]]--;
+            mp[ele[1]]++;
+        }
+        for(auto ele:mp){
+            if(ele.second==n-1){
+                ans = ele.first;
+            }
+        }
+        return ans;
+    }
+};
