@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool canPlaceQueen(int row, int col, vector<string> &grid){
+        for(int i=row-1; i>=0; i--){
+            if(grid[i][col]=='Q'){
+                return false;
+            }
+        }
+        for(int i=row-1, j=col-1; i>=0 && j>=0; i--, j--){
+            if(grid[i][j]=='Q'){
+                return false;
+            }
+        }
+        for(int i=row-1, j=col+1; i>=0 && j<grid.size(); i--, j++){
+            if(grid[i][j]=='Q'){
+                return false;
+            }
+        }
+        return true;
+    }
+    void solve(int currRow, int n, vector<string> &grid, vector<vector<string>> &result){
+        if(currRow==n){
+            result.push_back(grid);
+            return;
+        }
+        for(int col=0; col<n; col++){
+            if(canPlaceQueen(currRow, col, grid)){
+                grid[currRow][col] = 'Q';
+                solve(currRow+1, n, grid, result);
+                grid[currRow][col] = '.';
+            }
+        }
+    }
+    int totalNQueens(int n) {
+        vector<vector<string>> result;
+        vector<string> grid(n, string(n, '.'));
+        solve(0, n, grid, result);
+        return result.size();
+    }
+};
