@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string finalString(string s) {
+        string final = "";
+        for(auto ch:s){
+            if(ch=='i'){
+                reverse(final.begin(), final.end());
+            }
+            else{
+                final +=ch;
+            }
+        }
+        return final;
+    }
+};
