@@ -1,0 +1,9 @@
+class Solution {
+public:
+    string maximumOddBinaryNumber(string s) {
+        int len = s.length();
+        int count_ones = count(s.begin(), s.end(), '1');
+        int count_zeroes = len - count_ones;
+        return string(count_ones - 1, '1') + string(count_zeroes, '0') + "1";
+    }
+};
