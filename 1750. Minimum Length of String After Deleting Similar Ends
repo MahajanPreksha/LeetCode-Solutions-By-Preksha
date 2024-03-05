@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int minimumLength(string s) {
+        int n = s.size();
+        int left_ptr = 0, right_ptr = n - 1;
+        for(; left_ptr<right_ptr && s[left_ptr]==s[right_ptr]; left_ptr++, right_ptr--){
+            while(s[left_ptr]==s[left_ptr+1] && left_ptr+1<right_ptr){
+                left_ptr++;
+            }
+            while(s[right_ptr]==s[right_ptr-1] && left_ptr<right_ptr-1){
+                right_ptr--;
+            }
+        }
+        return right_ptr - left_ptr + 1;
+    }
+};
