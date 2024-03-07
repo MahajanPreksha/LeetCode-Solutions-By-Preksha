@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string oddString(vector<string>& words) {
+        int n = words[0].size();
+        map<vector<int>, vector<string>> mp;
+        for(string word:words){
+            int prev = word[0];
+            vector<int> temp;
+            for(int i=1; i<n; i++){
+                int c_int = word[i] - 'a';
+                temp.push_back(c_int - prev);
+                prev = c_int; 
+            }
+            mp[temp].push_back(word);
+        }
+        string res = "";
+        for(auto const [key, val]: mp){
+            if(val.size()== 1){
+                res = val[0];
+                break;
+            }
+        }
+        return res;
+    }
+};
