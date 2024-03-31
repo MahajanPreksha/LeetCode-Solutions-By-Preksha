@@ -16,10 +16,8 @@ public:
             if (nums[i] == maxK) {
                 right_idx = i;
             }
-
             res += max(0, min(left_idx, right_idx) - bad_idx);
         }
-
         return res;
     }
 };
