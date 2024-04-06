@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        stack<pair<char, int>> st;
+        vector<char> arr(s.length(),'*');
+        string ans = "";
+        for(int i=0; i<s.length(); i++){
+            if(s[i]!=')' && s[i]!='('){
+                arr[i] = s[i];
+            }
+            if(s[i]=='('){
+                st.push({s[i],i});
+            }
+            if(s[i]==')'){
+                if(!st.empty()){
+                    arr[i] = s[i];
+                    auto top = st.top();
+                    st.pop();
+                    arr[top.second] = top.first;
+                }
+            }
+        }
+        for(int i=0; i<arr.size(); i++){
+            if(arr[i]!='*')
+                ans +=arr[i];
+        }
+        return ans;
+    }
+};
