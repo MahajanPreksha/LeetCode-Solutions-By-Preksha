@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool checkValidString(string s) {
+        int n = s.length();
+        stack<char> st, br;
+        for(int i=0; i<n; i++){
+            if(s[i]=='('){
+                br.push(i);
+            }
+            else if(s[i]=='*'){
+                st.push(i);
+            }
+            else{
+                if(!br.empty()){
+                    br.pop();
+                }
+                else if(!st.empty()){
+                    st.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        while(!br.empty() && !st.empty()){
+            if(br.top()<st.top()){
+                br.pop();
+                st.pop();
+            }
+            else{
+                break;
+            }
+        }
+        return br.empty();
+    }
+};
