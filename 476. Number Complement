@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int findComplement(int num) {
+        int temp = num;
+        string res = "";
+        while(temp!=1){
+            if(temp%2==1){
+                res +='1';
+            }
+            else{
+                res +='0';
+            }
+            temp /=2;
+        }
+        reverse(res.begin(), res.end());
+        int len = res.length();
+        for(int i=0; i<len; i++){
+            if(res[i] == '0'){
+                res[i] = '1';
+            }
+            else{
+                res[i] = '0';
+            }
+        }
+        int power1 = 1, n = 0;
+        for(int i=len-1; i>=0; i--){
+            if(res[i]=='1'){
+                n +=power1;
+            }
+            power1 *=2;
+        }
+        return n;
+    }
+};
