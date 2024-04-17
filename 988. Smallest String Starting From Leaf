@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void minheight(TreeNode * root,vector<string>& temp,string& t){
+        if(root->left==NULL && root->right==NULL){
+            t +=(root->val + 'a');
+            reverse(t.begin(), t.end());
+            temp.push_back(t);
+            reverse(t.begin(), t.end());
+            t.pop_back();
+            return ;
+        }
+        t.push_back(root->val + 'a');
+        if(root->left){
+            minheight(root->left, temp, t);
+        }
+        if(root->right){
+            minheight(root->right, temp, t);
+        }
+        t.pop_back();
+    }
+    string smallestFromLeaf(TreeNode* root) {
+        vector<string> temp;
+        string t = "";
+        minheight(root, temp, t);
+        sort(temp.begin(), temp.end());
+        return temp[0];
+    }
+};
