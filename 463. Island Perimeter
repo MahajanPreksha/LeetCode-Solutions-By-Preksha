@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int islandPerimeter(vector<vector<int>>& grid) {
+        int ans = 0;
+        int n = grid.size();
+        int m = grid[0].size();
+        int delRow[] = {-1, 0, 1, 0};
+        int delCol[] = {0, 1, 0, -1};
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(grid[i][j]==1){
+                    for(int k=0; k<4; k++){
+                        int x = i + delRow[k];
+                        int y = j + delCol[k];
+                        if(x>=0 && x<n && y>=0 && y<m && grid[x][y]==0){
+                            ans++;
+                        }
+                        else if(x<0 || y<0 || x>=n || y>=m){
+                            ans++;
+                        }
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
