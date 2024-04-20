@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<vector<int>> temp;
+    void f(int i, int j, vector<vector<int>>& vis, vector<vector<int>>& land){
+        int n = land.size();
+        int m = land[0].size();
+        queue<pair<int, int>> q;
+        q.push({i, j});
+        vis[i][j] = 1;
+        int dr[4] = {1, -1, 0, 0};
+        int dc[4] = {0, 0, 1, -1};
+        int row = INT_MIN;
+        int col = INT_MIN;
+        while(!q.empty()){
+            int r = q.front().first;
+            int c = q.front().second;
+            row = max(row, r);
+            col = max(col, c);
+            q.pop();
+            for(int i=0; i<4; i++){
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+                if(nr>=0 && nr<n && nc>=0 && nc<m && !vis[nr][nc] && land[nr][nc]==1){
+                    vis[nr][nc] = 1;
+                    q.push({nr, nc});
+                }
+            }
+        }
+        vector<int> ans = {i, j, row, col};
+        temp.push_back(ans);
+    }
+    vector<vector<int>> findFarmland(vector<vector<int>>& land) {
+        int n = land.size();
+        int m = land[0].size();
+        vector<vector<int>> vis(n, vector<int>(m, 0));
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(!vis[i][j] && land[i][j]==1){
+                    f(i, j, vis, land);
+                }
+            }
+        }
+        return temp;
+    }
+};
