@@ -1,0 +1,23 @@
+    int findParent(int i, vector<int>& parent){
+        if(parent[i]==i){
+            return i;
+        }
+        return findParent(parent[i], parent);
+    }
+    void unionbyrank(int i, int j, vector<int>& parent, vector<int>& rank){
+        int pi=findParent(i,parent);
+        int pj=findParent(j,parent);
+        if(pi==pj){
+            return;
+        }
+        int ri=rank[i];
+        int rj=rank[j];
+        if(ri<rj){
+            parent[pi]=pj;
+        }else if(ri>rj){
+            parent[pj]=pi;
+        }else{
+            parent[pj]=pi;
+            rank[pi]++;
+        }
+    };
