@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int tribonacciHelper(int n, unordered_map<int, int>& memo) {
+        if(n==0){
+            return 0;
+        }
+        if(n==1 || n==2){
+            return 1;
+        }
+        if(memo.find(n)!=memo.end()){
+            return memo[n];
+        }
+        int result = tribonacciHelper(n-3, memo) + tribonacciHelper(n-1, memo) + tribonacciHelper(n-2, memo);
+        memo[n] = result;
+        return result;
+    }
+    int tribonacci(int n) {
+        unordered_map<int, int> memo;
+        return tribonacciHelper(n, memo);
+    }
+};
