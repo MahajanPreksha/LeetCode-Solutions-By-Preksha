@@ -1,0 +1,27 @@
+#define p pair<int, int>
+class Solution {
+public:
+    int minFallingPathSum(vector<vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        priority_queue<p, vector<p>, greater<p>> pq[m];
+        int res = INT_MAX;
+        for(int j=0; j<n; j++){
+            pq[m-1].push({grid[m-1][j], j});
+        }
+        for(int i=m-2; i>=0; i--){
+            for(int j=0; j<n; j++){
+                pair<int, int> pr = pq[i+1].top();
+                if(pr.second==j){
+                    pq[i+1].pop();
+                    pair<int, int> pr1 = pq[i+1].top();
+                    pq[i].push({pr1.first+grid[i][j], j});
+                    pq[i+1].push(pr);
+                }
+                else{
+                    pq[i].push({pr.first+grid[i][j], j});
+                }
+            }
+        }
+        return pq[0].top().first;
+    }
+};
