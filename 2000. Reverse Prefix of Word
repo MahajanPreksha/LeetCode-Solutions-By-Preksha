@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string reversePrefix(string word, char ch) {
+        vector<char> prefix;
+        string suffix = "";
+        for(int i=0; i<word.length(); i++){
+            prefix.push_back(word[i]);
+            if(word[i]==ch){
+                suffix = word.substr(i+1, word.length()-1);
+                break;
+            }
+            if(i+1==word.length()){
+                prefix.clear();
+            }
+        }
+        reverse(prefix.begin(), prefix.end());
+        string res(prefix.begin(), prefix.end());
+        res +=suffix;
+        return prefix.size()==0? word:res;
+    }
+};
