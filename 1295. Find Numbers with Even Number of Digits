@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int countDigits(int num){
+        int temp = num;
+        int count = 0;
+        while(temp!=0){
+            int lastDig = temp % 10;
+            count++;
+            temp /=10;
+        }
+        return count;
+    }
+    int findNumbers(vector<int>& nums) {
+        int ans = 0;
+        for(int i=0; i<nums.size(); i++){
+            if(countDigits(nums[i])%2==0){
+                ans++;
+            }
+            else{
+                continue;
+            }
+        }
+        return ans;
+    }
+};
