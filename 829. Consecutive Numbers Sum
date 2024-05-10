@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int consecutiveNumbersSum(int n) {
+        int count = 1;
+        if(n<=2){
+            return 1;
+        }
+        unordered_map<int, int> mp;
+        for(int i=2; i*i<=n; i++){
+            if(n%i==0){
+                int j = n/i;
+                if(i%2==0 && j%2){
+                    count++;
+                }
+                else if(j==i && i%2){
+                    count++;
+                }
+                else if(i%2 && j%2){
+                    count +=2;
+                }
+                else if(i%2){
+                    count++;    
+                }
+            }
+        }
+        if(n%2==1){
+            count++;
+        }
+        return count;
+    }
+};
