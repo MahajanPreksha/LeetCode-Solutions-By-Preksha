@@ -1,0 +1,33 @@
+class Solution {
+private:
+    bool isPalindrome(string s){
+        string str = s;
+        reverse(s.begin(), s.end());
+        if(str==s){
+            return true;
+        }
+        return false;
+    }
+    void f(int i, string s, vector<string> partitions, vector<vector<string>>& ans){
+        if(i==s.length()){
+            ans.push_back(partitions);
+            return;
+        }
+        string curr = "";
+        for(int j=i; j<s.length(); j++){
+            curr +=s[j];
+            if(isPalindrome(curr)){
+                partitions.push_back(curr);
+                f(j+1, s, partitions, ans);
+                partitions.pop_back();
+            }
+        }
+    }
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> ans;
+        vector<string> partitions;
+        f(0, s, partitions, ans);
+        return ans;
+    }
+};
