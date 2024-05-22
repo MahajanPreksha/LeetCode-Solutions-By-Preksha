@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int integerBreak(int n) {
+        if(n<=3){
+            return n - 1;
+         }
+        int div = n / 3;
+        int rem = n % 3;
+        int val = pow(3, div);
+        if(rem==2){
+            return val * 2;
+        }
+        else if(rem==0){
+            return val;
+        }
+        else{
+            return (val/3) * 4;
+        }
+    }
+};
