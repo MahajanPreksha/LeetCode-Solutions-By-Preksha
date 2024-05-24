@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int valstr(string s, unordered_map<char, int>& mp, vector<int>& score){
+        int p = 0;
+        unordered_map<char, int> temp = mp;
+        for(int i=0; i<s.length(); i++){
+            if(temp[s[i]]>0){
+                temp[s[i]]--;
+                p +=score[s[i] - 'a'];
+            }
+            else{
+                return 0;
+            }
+        }
+        for(char c:s){
+            mp[c]--;
+        }
+        return p;
+    }
+    void f(vector<string>& words, unordered_map<char, int>& mp, vector<int>& score,int& op, int idx, int sum){
+        if(idx>=words.size()){
+            return;
+        }
+        for(int j=idx; j<words.size(); j++){
+            int a = valstr(words[j], mp, score);
+            if(a>0){
+                sum +=a;
+                op = max(op, sum);
+                f(words, mp, score, op, j+1, sum);
+                sum -=a;
+                for(char c:words[j]){
+                    mp[c]++;
+                }
+            }
+        }
+    }
+    int maxScoreWords(vector<string>& words, vector<char>& letters, vector<int>& score) {
+        unordered_map<char, int> mp;
+        for(auto it:letters){
+            mp[it]++;
+        }
+        int op = 0;
+        f(words, mp, score, op, 0, 0);
+        return op;
+    }
+};
