@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void calculateAllWordBreaks(string s, vector<string>& wordDict, vector<string>& ans, unordered_map<string, int>& mp, string temp){
+        if(s.size()==0){
+            ans.push_back(temp.substr(0, temp.size() - 1));
+            return;
+        }
+        for(int index=0; index<s.size(); index++){
+            if(mp.find(s.substr(0, index + 1))!=mp.end()){
+                calculateAllWordBreaks(s.substr(index + 1), wordDict, ans, mp, temp + s.substr(0, index+1) + ' ');
+            }
+        }
+    }
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        vector<string> ans;
+        unordered_map<string, int> mp;
+        for(auto word:wordDict){
+            mp[word]++;
+        }
+        string temp = "";
+        calculateAllWordBreaks(s, wordDict, ans, mp, temp);
+        return ans;
+    }
+};
