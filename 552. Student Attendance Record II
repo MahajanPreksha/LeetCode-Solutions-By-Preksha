@@ -1,0 +1,24 @@
+class Solution {
+private:
+    int MOD = 1000000007;
+public:
+    int checkRecord(int n) {
+        vector<vector<int>> dp(2, vector<int>(3, 1));
+        for(int i=1; i<=n; i++){
+            vector<vector<int>> _dp(2, vector<int>(3, 0));
+            for(int j=0; j<2; j++){
+                for(int k=0; k<3; k++){
+                    _dp[j][k] = dp[j][0];
+                    if(j+1<2){
+                        _dp[j][k] = (_dp[j][k] + dp[j+1][0]) % MOD;
+                    }
+                    if(k+1<3){
+                        _dp[j][k] = (_dp[j][k] + dp[j][k+1]) % MOD;
+                    }
+                }
+            }
+            dp.swap(_dp);
+        }
+        return dp[0][0];
+    }
+};
