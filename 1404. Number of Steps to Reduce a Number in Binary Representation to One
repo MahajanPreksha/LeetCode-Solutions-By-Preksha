@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int numSteps(string s) {
+        int ans = 0;
+        while(s!="1"){
+            int n = s.size();
+            if(s[n-1]=='0'){
+                s.pop_back();
+            }
+            else{
+                int carry = 1;
+                for(int i=n-1; i>=0 && carry; i--){
+                    if(s[i]=='1'){
+                        s[i] = '0';
+                    }
+                    else{
+                        s[i] = '1';
+                        carry = 0;
+                    }
+                }
+                if(carry){
+                    s.insert(s.begin(), '1');
+                }
+            }
+            ans++;
+        }
+        return ans;
+    }
+};
