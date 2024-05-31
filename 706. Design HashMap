@@ -1,0 +1,32 @@
+class MyHashMap {
+private:
+    vector<int> v;
+    vector<bool> exists;
+public:
+    MyHashMap() {
+        int size = 1e6 + 1;
+        v.resize(size, -1);
+        exists.resize(size, false);
+    }
+    
+    void put(int key, int value) {
+        v[key] = value;
+        exists[key] = true;
+    }
+    
+    int get(int key) {
+        return exists[key]? v[key]:-1;
+    }
+    
+    void remove(int key) {
+        exists[key] = false;
+    }
+};
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap* obj = new MyHashMap();
+ * obj->put(key,value);
+ * int param_2 = obj->get(key);
+ * obj->remove(key);
+ */
