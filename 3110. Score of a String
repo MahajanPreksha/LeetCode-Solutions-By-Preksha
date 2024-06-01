@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int scoreOfString(string s) {
+        vector<int> v;
+        for(int i=0; i<s.length(); i++){
+            v.push_back((int)s[i]);
+        }
+        int score = 0;
+        for(int j=1; j<s.length(); j++){
+            int k = abs(v[j-1] - v[j]);
+            score +=k;
+        }
+        return score;
+    }
+};
