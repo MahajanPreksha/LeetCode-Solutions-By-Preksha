@@ -1,0 +1,33 @@
+class RecentCounter {
+public:
+    queue<int> q;
+    int count = 0;
+    RecentCounter() {
+        
+    }
+    
+    int ping(int t) {
+        if(q.empty()){
+            q.push(t);
+            count = 1;
+        }
+        else{
+            q.push(t);
+            if(q.front()>=t-3000){
+                count++;
+            }
+            else{
+                while(!q.empty() && q.front()<t-3000){
+                    q.pop();
+                }
+            }
+        }
+        return q.size();
+    }
+};
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter* obj = new RecentCounter();
+ * int param_1 = obj->ping(t);
+ */
