@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int n = s.length();
+        if(n==1){
+            return n;
+        }
+        unordered_map<char, int> mp;
+        for(auto c:s){
+            mp[c]++;
+        }
+        int ans = 0;
+        bool flag = false;
+        for(auto it:mp){
+            if(it.second%2==0){
+                ans +=it.second;
+            }
+            else{
+                ans +=it.second - 1;
+                flag = true;
+            }
+        }
+        if(flag){
+            return ans + 1;
+        }
+        else{
+            return ans;
+        }
+    }
+};
