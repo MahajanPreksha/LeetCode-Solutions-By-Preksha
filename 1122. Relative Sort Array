@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+        map<int, int> mp;
+        for(auto it:arr1){ 
+            mp[it]++;
+        }
+        int i = 0;
+        for(auto it:arr2){
+            while(mp[it]){
+                arr1[i] = it;
+                mp[it]--;
+                i++;
+            }
+            mp.erase(it);
+        }
+        for(auto &[num, val]:mp){
+            while(val){
+                arr1[i] = num;
+                val--;
+                i++;
+            }
+            if(val==0){
+                mp.erase(num);
+            }
+        }
+        return arr1;
+    }
+};
