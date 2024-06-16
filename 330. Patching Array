@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int minPatches(vector<int>& nums, int n) {
+        long long m = 1;
+        int i = 0;
+        long count = 0;
+        while(m<=n){
+            if(i<nums.size() && m>=nums[i]){
+                m +=nums[i++];
+            }
+            else{
+                count++;
+                m +=m;
+            }
+        }
+        return count;
+    }
+};
