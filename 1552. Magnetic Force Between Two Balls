@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool f(vector<int>& position, int m, int mid){
+        int b = 1;
+        int p = position[0];
+        for(int i=1; i<position.size(); i++){
+            if(position[i]-p>=mid){
+                b++;
+                if(b==m){
+                    return true;
+                }
+                p = position[i];
+            }
+        }
+        return false;
+    }
+    int maxDistance(vector<int>& position, int m) {
+        int n = position.size();
+        sort(position.begin(), position.end());
+        int i = 0;
+        int j = position[n-1];
+        int mid;
+        int ans = -1;
+        while(i<=j){
+            mid = i + (j - i) / 2;
+            if(f(position, m, mid)){
+                ans = mid;
+                i = mid + 1;
+            }
+            else{
+                j = mid - 1;
+            }
+        }
+        return ans;
+    }
+};
