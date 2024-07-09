@@ -1,0 +1,21 @@
+class Solution {
+public:
+    double averageWaitingTime(vector<vector<int>>& customers) {
+        long long wait = 0;
+        long long curr = 0;
+        int i = 0;
+        int n = customers.size();
+        while(i<n){
+            int at = customers[i][0];
+            int tt = customers[i][1];
+            if(at>curr){
+                curr = at;
+            }
+            curr +=tt;
+            wait +=curr - at;
+            i++;
+        }
+        double ans = (double)((double)wait/(double)n);
+        return ans;
+    }
+};
