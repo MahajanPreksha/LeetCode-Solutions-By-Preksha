@@ -1,0 +1,52 @@
+class Solution {
+public:
+    int solve_ab(string &s, string &left, int &x, int &y){
+        left +=s[0];
+        int idx = 1;
+        int ans = 0;
+        while(idx<s.length()){
+            if(s[idx]=='b' && !left.empty() && left.back()=='a'){
+                ans +=x;
+                left.pop_back();
+            }
+            else{
+                left +=s[idx];
+            }
+            idx++;
+        }
+        s = left;
+        left.clear();
+        return ans;
+    }
+    int solve_ba(string &s, string &left, int &x, int &y){
+        left +=s[0];
+        int idx = 1;
+        int ans = 0;
+        while(idx<s.length()){
+            if(s[idx]=='a' && !left.empty() && left.back()=='b'){
+                ans +=y;
+                left.pop_back();
+            }
+            else{
+                left +=s[idx];
+            }
+            idx++;
+        }
+        s = left;
+        left.clear();
+        return ans;
+    }
+    int maximumGain(string s, int x, int y) {
+        int ans = 0;
+        string left = "";
+        if(x>= y){
+            ans +=solve_ab(s, left, x, y);
+            ans +=solve_ba(s, left, x, y);
+        }
+        else{
+            ans +=solve_ba(s, left, x, y);
+            ans +=solve_ab(s, left, x, y);
+        }
+        return ans;
+    }
+};
