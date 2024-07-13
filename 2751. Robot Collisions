@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector<int> survivedRobotsHealths(vector<int>& positions, vector<int>& healths, string directions) {
+        vector<pair<int, int>> robots;
+        for(int i=0; i<positions.size(); i++){
+            robots.emplace_back(positions[i], i);
+        }
+        sort(robots.begin(), robots.end());
+        stack<int> st;
+        for(const auto& robot:robots){
+            int i = robot.second;
+            if(directions[i]=='L'){
+                while(!st.empty() && directions[st.top()]=='R'){
+                    int j = st.top();
+                    if(healths[j]>healths[i]){
+                        healths[j]--;
+                        healths[i] = 0;
+                        break;
+                    }
+                    else if(healths[j]<healths[i]){
+                        healths[i]--;
+                        healths[j] = 0;
+                        st.pop();
+                    }
+                    else{
+                        healths[i] = 0; 
+                        healths[j] = 0; 
+                        st.pop();
+                        break;
+                    }
+                }
+                if(healths[i]>0){
+                    st.push(i);
+                }
+            }
+            else{
+                st.push(i);
+            }
+        }
+        vector<int> result;
+        for(int i=0; i<healths.size(); i++){
+            if(healths[i]>0){
+                result.push_back(healths[i]);
+            }
+        }
+        return result;
+    }
+};
