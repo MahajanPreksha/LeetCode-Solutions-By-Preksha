@@ -1,0 +1,41 @@
+class Solution {
+public:
+    string countOfAtoms(string formula) {
+        string res;
+        map<string, int> mp;
+        stack<int> st;
+        st.push(1);
+        int i = formula.size() - 1;
+        while(i>=0){
+            string d;
+            while(isdigit(formula[i])) {
+                d = formula[i--] + d;
+            }
+            int digit = d.size()? stoi(d):0;
+            if(formula[i]==')'){
+                st.push(st.top() * max(1, digit));
+                i--;
+            }
+            else if(formula[i]=='('){
+                st.pop();
+                i--;
+            }
+            else{
+                string name;
+                while(islower(formula[i])){
+                    name +=formula[i--];
+                }
+                name +=formula[i--];
+                reverse(name.begin(), name.end());
+                mp[name] +=st.top() * max(1, digit);
+            }
+        }
+        for(auto& [name, count]:mp){
+            res +=name;
+            if(count>1){
+                res +=to_string(count);
+            }
+        }
+        return res;
+    }
+};
