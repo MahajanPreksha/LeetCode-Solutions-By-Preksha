@@ -1,0 +1,50 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
+        unordered_map<int, TreeNode*> parent, child;
+        for (vector<int>& it : descriptions) {
+            int parentVal = it[0];
+            int childVal = it[1];
+            int isLeft = it[2];
+            if(parent.find(parentVal)==parent.end()){
+                if(child.find(parentVal)==child.end()){
+                    parent[parentVal] = new TreeNode(parentVal);
+                }
+                else {
+                    parent[parentVal] = child[parentVal];
+                }
+            }
+            if(child.find(childVal)==child.end()){
+                if(parent.find(childVal)==parent.end()){
+                    child[childVal] = new TreeNode(childVal);
+                }
+                else {
+                    child[childVal] = parent[childVal];
+                }
+            }
+            if(isLeft){
+                parent[parentVal]->left = child[childVal];
+            }
+            else{
+                parent[parentVal]->right = child[childVal];
+            }
+        }
+        for(auto& ele : parent){
+            if(child.find(ele.first)==child.end() && (ele.second->left || ele.second->right)){
+                return ele.second;
+            }
+        }
+        return NULL;
+    }
+};
