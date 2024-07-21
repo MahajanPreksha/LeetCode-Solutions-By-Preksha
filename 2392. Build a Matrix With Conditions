@@ -1,0 +1,50 @@
+class Solution {
+public:
+    vector<int> f(vector<vector<int>> &vec, int k){
+        vector<int> ind(k+1, 0);
+        vector<vector<int>> adj(k+1);
+        for(const auto& edge:vec){
+            adj[edge[0]].push_back(edge[1]);
+            ind[edge[1]]++;
+        }
+        queue<int> q;
+        for(int i=1; i<=k; i++){
+            if(ind[i]==0){
+                q.push(i);
+            }
+        }
+        vector<int>ans;
+        while(!q.empty()){
+            int top = q.front();
+            q.pop();
+            ans.push_back(top);
+            for(auto it:adj[top]){
+                ind[it]--;
+                if(ind[it]==0){
+                    q.push(it);
+                }
+            }
+        }
+        if(ans.size()!=k){
+            return {};
+        }
+        return ans;
+    }
+    vector<vector<int>> buildMatrix(int k, vector<vector<int>>& rowConditions, vector<vector<int>>& colConditions) {
+        vector<vector<int>> answer(k, vector<int>(k, 0));
+        vector<int> rowtopo = f(rowConditions, k);
+        vector<int> coltopo = f(colConditions, k);
+        if(rowtopo.empty() || coltopo.empty()){
+            return {};
+        }
+        vector<int> rowind(k + 1), colind(k + 1);
+        for(int i=0; i<k; i++){
+            rowind[rowtopo[i]] = i;
+            colind[coltopo[i]] = i;
+        }
+        for(int i=1; i<=k; i++){
+            answer[rowind[i]][colind[i]] = i;
+        }
+        return answer;
+    }
+};
