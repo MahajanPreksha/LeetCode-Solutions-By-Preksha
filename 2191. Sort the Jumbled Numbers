@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int f(int i, vector<int>& mapping){
+        int res = 0;
+        int c = 10;
+        res +=mapping[i%10];
+        i /=10;
+        while(i){
+            res +=mapping[i%10]*c;
+            c *=10;
+            i /=10;
+        }
+        return res;
+    }
+    vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
+        vector<pair<int, int>> p;
+        for(int i=0; i<nums.size(); i++){
+            p.push_back({f(nums[i], mapping), i});
+        }
+        sort(p.begin(), p.end());
+        vector<int> ans;
+        for(auto x:p){
+            ans.push_back(nums[x.second]);
+        }
+        return ans;
+    }
+};
