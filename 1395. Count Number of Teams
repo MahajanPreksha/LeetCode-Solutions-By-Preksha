@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int numTeams(vector<int>& rating) {
+        int n = rating.size();
+        vector<int> small(n, 0);
+        vector<int> big(n,0);
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                if(rating[j]>rating[i]){
+                    big[i]++;
+                }
+                else if(rating[j]<rating[i]){
+                    small[i]++;
+                }
+            }
+        }
+        int count = 0;
+        for(int i=0; i<=n-3; i++){
+            for(int j=i+1; j<=n-2; j++){
+                if(rating[i]<rating[j]){
+                    count +=big[j];
+                }
+                else if(rating[i]>rating[j]){
+                    count +=small[j];
+                }
+
+            }
+        }
+        return count;
+    }
+};
