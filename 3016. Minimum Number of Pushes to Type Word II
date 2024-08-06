@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int minimumPushes(string word) {
+        vector<int> count(26, 0);
+        for(char &x:word){
+            count[x - 'a']++;
+        }
+        sort(count.begin(), count.end(), greater<int>());
+        int pushes = 0;
+        for(int i=0; i<26; i++){
+            if(i<8){
+                pushes +=count[i];
+            }
+            else if(i<16){
+                pushes +=2 * count[i];
+            }
+            else if(i<24){
+                pushes +=3 * count[i];
+            }
+            else{
+                pushes +=4 * count[i];
+            }
+        }
+        return pushes;
+    }
+};
