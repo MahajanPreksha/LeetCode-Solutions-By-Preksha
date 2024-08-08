@@ -1,0 +1,55 @@
+class Solution {
+public:
+    vector<vector<int>> spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
+        vector<vector<int>> res(rows*cols, vector<int> (2));
+        int count = 0;
+        int right = cStart + 1;
+        int left = cStart - 1;
+        int up = rStart - 1;
+        int down = rStart + 1;
+        int size = rows * cols;
+        while(count<size){
+            while(count<size && cStart<right){
+                if(rStart>=0 && rStart<rows && cStart>=0 && cStart<cols){
+                    res[count++] = {rStart, cStart};
+                }
+                else{
+                    cStart == right - 1;
+                }
+                cStart++;
+            }
+            right++;
+            while(count<size && rStart<down){
+                if(rStart>=0 && rStart<rows && cStart>=0 && cStart<cols){
+                    res[count++] = {rStart, cStart};
+                }
+                else{
+                    rStart == down - 1;
+                }
+                rStart++;
+            }
+            down++;
+            while(count<size && cStart>left){
+                if(rStart>=0 && rStart<rows && cStart>=0 && cStart<cols){
+                    res[count++] = {rStart, cStart};
+                }
+                else{
+                    cStart == left + 1;
+                }
+                cStart--;
+            }
+            left--;
+            while(count<size && rStart>up){
+                if(rStart>=0 && rStart<rows && cStart>=0 && cStart<cols){
+                    res[count++] = {rStart, cStart};
+                }
+                else{
+                    rStart == up + 1;
+                }
+                rStart--;
+            }
+            up--;
+        }
+        return res;
+    }
+};
