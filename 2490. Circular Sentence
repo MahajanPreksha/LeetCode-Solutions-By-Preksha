@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool isCircularSentence(string sentence) {
+        int n = sentence.length();
+        if(sentence[0]!=sentence[n-1]){
+            return false;
+        }
+        for(int i=1; i<n; i++){
+            if(sentence[i]==' ' && (tolower(sentence[i-1])!=tolower(sentence[i+1]))){
+                return false;
+            }
+        }
+        return true;
+    }
+};
