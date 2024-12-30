@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string capitalizeTitle(string title) {
+        vector<string> v;
+        string word = "";
+        for(int i=0; i<title.size(); i++){
+            if(title[i]!=' '){
+                word +=title[i];
+            }
+            else{
+                v.push_back(word);
+                word = "";
+            }
+        }
+        if(!word.empty()){
+            v.push_back(word);
+        }
+        string ans = "";
+        for(string s:v){
+            if(s.size()<=2){
+                for(char &c:s){
+                    c = tolower(c);
+                }
+            }
+            else{
+                s[0] = toupper(s[0]);
+                for(int i=1; i<s.size(); i++){
+                    s[i] = tolower(s[i]);
+                }
+            }
+            ans +=s + " ";
+        }
+        if(!ans.empty()){
+            ans.pop_back();
+        }
+        return ans;
+    }
+};
