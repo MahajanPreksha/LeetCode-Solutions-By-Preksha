@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int f(vector<int>& nums){
+        int a = 0, b = 0;
+        for(int i:nums){
+            int curr = max(a, b+i);
+            b = a;
+            a = curr;
+        }
+        return a;
+    }
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+        if(n==0){
+            return 0;
+        }
+        if(n==1){
+            return nums[0];
+        }
+        vector<int> sub1(nums.begin()+1, nums.end());
+        vector<int> sub2(nums.begin(), nums.end()-1);
+        return max(f(sub1), f(sub2));
+    }
+};
