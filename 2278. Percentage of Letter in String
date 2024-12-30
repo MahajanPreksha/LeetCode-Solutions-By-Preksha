@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int percentageLetter(string s, char letter) {
+        unordered_map<char, int> mp;
+        for(char ch:s){
+            mp[ch]++;
+        }
+        int count = mp[letter];
+        int percentage = (static_cast<double>(count)/s.length()) * 100;
+        return floor(percentage);
+    }
+};
