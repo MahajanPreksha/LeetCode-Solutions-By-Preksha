@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int pathSumHelper(TreeNode* root, int targetSum, long int currSum, unordered_map<long int, int> pathCount){
+        if(root==NULL){
+            return 0;
+        }
+        currSum +=root->val;
+        int count = pathCount[currSum - targetSum];
+        pathCount[currSum]++;
+        count +=pathSumHelper(root->left, targetSum, currSum, pathCount) + pathSumHelper(root->right, targetSum, currSum, pathCount);
+        pathCount[currSum]--; //While backtracking
+        return count;
+    }
+    int pathSum(TreeNode* root, int targetSum) {
+        unordered_map<long int, int> pathCount;
+        pathCount[0] = 1;
+        return pathSumHelper(root, targetSum, 0, pathCount);
+    }
+};
