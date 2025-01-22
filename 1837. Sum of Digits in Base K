@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int sumBase(int n, int k) {
+        int ans = 0;
+        while(n>0){
+            int lastDigit = n % k;
+            ans +=lastDigit;
+            n /=k;
+        }
+        return ans;
+    }
+};
