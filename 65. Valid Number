@@ -1,0 +1,41 @@
+class Solution {
+public:
+    bool isNumber(string s) {
+        int i = 0, n = s.size();
+        bool hasNum = false, hasExp = false, hasDot = false;
+        if(i<n && (s[i]=='+' || s[i]=='-')){
+            i++;
+        }
+        while(i<n && isdigit(s[i])){
+            hasNum = true;
+            i++;
+        }
+        if(i<n && s[i]=='.'){
+            hasDot = true;
+            i++;
+            while(i<n && isdigit(s[i])){
+                hasNum = true;
+                i++;
+            }
+        }
+        if(i<n && (s[i]=='e' || s[i]=='E')){
+            if(!hasNum){
+                return false;
+            }
+            hasExp = true;
+            i++;
+            if(i<n && (s[i]=='+' || s[i]=='-')){
+                i++;
+            }
+        }
+        bool hasExpNum = false;
+        while(i<n && isdigit(s[i])){
+            hasExpNum = true;
+            i++;
+        }
+        if(hasExp && !hasExpNum){
+            return false;
+        }
+        return hasNum && i==n;
+    }
+};
