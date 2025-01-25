@@ -1,0 +1,20 @@
+class Solution {
+public:
+    void f(int i, int n, int k, vector<int>& li, vector<vector<int>>& ans){
+        if(li.size()==k){
+            ans.push_back(li);
+            return;
+        }
+        for(int j=i; j<=n; j++){
+            li.push_back(j);
+            f(j+1, n, k, li, ans);
+            li.pop_back();
+        }
+    }
+    vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> ans;
+        vector<int> li;
+        f(1, n, k, li, ans);
+        return ans;
+    }
+};
